@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-public class PreviousJob {
+public class Job {
 
     private String companyName;
     private String positionName;
@@ -16,23 +16,31 @@ public class PreviousJob {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @ManyToOne
-    private User user;
+    private Worker worker;
 
-    public PreviousJob(String companyName, String positionName, LocalDate contractStartDate, LocalDate contractEndDate, String note) {
+    public Job(Worker worker, String companyName, String positionName, LocalDate contractStartDate, LocalDate contractEndDate, String note) {
         this.companyName = companyName;
         this.positionName =positionName;
         this.contractStartDate = contractStartDate;
         this.contractEndDate = contractEndDate;
         this.note = note;
+        this.worker = worker;
         if (contractEndDate.isAfter(LocalDate.now()))
             this.currentJob = true;
+
     }
-    public PreviousJob(String companyName, String positionName, LocalDate contractStartDate, String note) {
+    public Job(Worker worker, String companyName, String positionName, LocalDate contractStartDate, String note) {
         this.companyName = companyName;
         this.positionName = positionName;
         this.contractStartDate = contractStartDate;
         this.currentJob = true;
+        this.worker = worker;
     }
+
+    public Job() {
+
+    }
+
     public String getCompanyName() {
         return companyName;
     }
@@ -59,5 +67,9 @@ public class PreviousJob {
 
     public boolean isCurrentJob() {
         return currentJob;
+    }
+
+    public Integer getId() {
+        return id;
     }
 }

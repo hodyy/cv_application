@@ -1,13 +1,13 @@
 package cz.project.cv_aplication.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
+import cz.project.cv_aplication.repository.JobRepository;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
-public class User {
+public class Worker {
 
     private String name;
     private String surename;
@@ -19,12 +19,15 @@ public class User {
     private Integer id;
 
 @OneToMany
-    private Set<PreviousJob> previousJobs;
+    private Set<Job> jobs;
 
-    public User(String name,String surename,LocalDate birthDay ) {
+    public Worker(String name, String surename, LocalDate birthDay ) {
         this.name =name;
         this.surename =surename;
         this.birthDay =birthDay;
+    }
+
+    public Worker() {
     }
 
     public String getName() {
@@ -59,11 +62,11 @@ public class User {
         this.id = id;
     }
 
-    public Set<PreviousJob> getPreviousJobs() {
-        return previousJobs;
+    public Set<Job> getJobs() {
+        return jobs;
     }
 
-    public void setPreviousJobs(Set<PreviousJob> previousJobs) {
-        this.previousJobs = previousJobs;
+    public void setPreviousJobs(Set<Job> jobs) {
+        this.jobs = jobs;
     }
 }
