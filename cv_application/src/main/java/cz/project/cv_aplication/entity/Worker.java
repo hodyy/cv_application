@@ -1,33 +1,38 @@
 package cz.project.cv_aplication.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import cz.project.cv_aplication.repository.JobRepository;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
+
+@NoArgsConstructor
 @Entity
 public class Worker {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String name;
     private String surename;
 
 @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate birthDay;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
 
-@OneToMany
-    private Set<Job> jobs;
 
-    public Worker(String name, String surename, LocalDate birthDay ) {
+@OneToMany(targetEntity = Job.class, cascade = CascadeType.ALL)
+@JoinColumn(name ="worker_id", referencedColumnName = "id")
+    private List<Job> jobs;
+
+    public Worker(String name, String surename, LocalDate birthDay, List<Job> jobs) {
         this.name =name;
         this.surename =surename;
         this.birthDay =birthDay;
-    }
-
-    public Worker() {
+        this.jobs=jobs;
     }
 
     public String getName() {
@@ -62,11 +67,12 @@ public class Worker {
         this.id = id;
     }
 
-    public Set<Job> getJobs() {
+    public List<Job> getJobs() {
+
         return jobs;
     }
 
-    public void setPreviousJobs(Set<Job> jobs) {
-        this.jobs = jobs;
+    public void setJob(Job job) {
+        this.jobs.add(job);
     }
 }

@@ -8,7 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.swing.text.html.Option;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,33 +21,15 @@ class RepositoryTest {
 	private WorkerRepository WorkerRepository;
 	@Autowired
 	private JobRepository JobRepository;
-//	@Autowired
-//	private UserPreviousJobsRepository UserPreviousJobsRepository;
 
 	@Test
 	void test() {
 
+//		Job job1 = new Job("Česká Banka", "Tester",LocalDate.of(2020, 7, 28),LocalDate.of(2020, 11, 28), "Testoval jsem SB");
+//		Worker worker = new Worker("Petr", "Hodyc", LocalDate.of(1996, 7, 26),jobList);
+		Worker worker = WorkerRepository.findWorkerById(2);
+		Worker we = worker;
 
-//		Worker worker = new Worker("Pavel", "Hodyc", LocalDate.of(1996, 7, 26));
-//		Job job = new Job(,"Česká Banka", "Tester",LocalDate.of(2020, 7, 28),LocalDate.of(2020, 11, 28), "Testoval jsem SB");
-//		WorkerRepository.save(worker);
-//		WorkerRepository.findById(7);
-//		JobRepository.save(job);
-		Optional<Worker> listWorkers = WorkerRepository.findById(7);
-		Worker worker = listWorkers.get();
-		Job job = new Job(worker,"Česká Pojištovna", "Developer",LocalDate.of(2020, 7, 28),LocalDate.of(2020, 11, 28), "Testoval jsem SB");
-		JobRepository.save(job);
-
-
-
-
-
-
-
-
-
-//		  List<User> users= UserRepository.findAll();
-//        UserRepository.save(new User("Pavel", "Hodyc", LocalDate.of(1996, 7, 26) ));
 
 	}
 

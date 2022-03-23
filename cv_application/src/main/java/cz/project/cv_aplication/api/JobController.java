@@ -1,31 +1,34 @@
 //package cz.project.cv_aplication.api;
 //
-//import cz.project.cv_aplication.entity.User;
-//import cz.project.cv_aplication.repository.UserRepository;
+//import cz.project.cv_aplication.entity.Job;
+//import cz.project.cv_aplication.entity.Worker;
+//import cz.project.cv_aplication.repository.JobRepository;
+//import cz.project.cv_aplication.repository.WorkerRepository;
 //import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.RequestBody;
-//import org.springframework.web.bind.annotation.RestController;
+//import org.springframework.web.bind.annotation.*;
 //
 //import java.util.List;
+//import java.util.Optional;
 //
 //@RestController
-//public class PreviousJobController {
+//public class JobController {
 //    @Autowired
-//    UserRepository UserRepository;
+//    WorkerRepository WorkerRepository;
+//    @Autowired
+//    JobRepository JobRepository;
 //
-//    @PostMapping("/AddNewUser")
-//    public void  AddNewUser(@RequestBody User newUser) {
-//               UserRepository.save(newUser);
+//    @GetMapping("/GetAllWorkerJobs/{id}")
+//    public Worker AddNewWorkersJob(@PathVariable int id) {
+//        return JobRepository.findAll();
 //    }
-//    @GetMapping("/GetAllUsers")
-//    public List<User> GetAllUsers(){
-//        return UserRepository.findAll();
+//    @DeleteMapping("/DeleteWork/{id}")
+//    public Worker AddNewWorkersJob(@PathVariable int id, @RequestBody Job newJob) {
+//
+//        Optional<Worker> optional = WorkerRepository.findWorkerById(id);
+//        Worker worker = optional.get();
+//        worker.setJob(newJob);
+//        return worker;
+//
 //    }
 //
-//    @GetMapping("/GetAllUsers")
-//    public List<User> GetAllUsers(){
-//        return UserRepository.findAll();
-//    }
 //}

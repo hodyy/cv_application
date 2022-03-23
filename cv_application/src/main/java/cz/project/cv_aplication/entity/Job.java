@@ -1,8 +1,16 @@
 package cz.project.cv_aplication.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.time.LocalDate;
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Entity
 public class Job {
 
@@ -15,29 +23,24 @@ public class Job {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @ManyToOne
-    private Worker worker;
+//    @ManyToOne
+//    private Worker worker;
 
-    public Job(Worker worker, String companyName, String positionName, LocalDate contractStartDate, LocalDate contractEndDate, String note) {
+    public Job(String companyName, String positionName, LocalDate contractStartDate, LocalDate contractEndDate, String note) {
         this.companyName = companyName;
         this.positionName =positionName;
         this.contractStartDate = contractStartDate;
         this.contractEndDate = contractEndDate;
         this.note = note;
-        this.worker = worker;
         if (contractEndDate.isAfter(LocalDate.now()))
             this.currentJob = true;
 
     }
-    public Job(Worker worker, String companyName, String positionName, LocalDate contractStartDate, String note) {
+    public Job(String companyName, String positionName, LocalDate contractStartDate, String note) {
         this.companyName = companyName;
         this.positionName = positionName;
         this.contractStartDate = contractStartDate;
         this.currentJob = true;
-        this.worker = worker;
-    }
-
-    public Job() {
 
     }
 
